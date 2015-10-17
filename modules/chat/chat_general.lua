@@ -280,9 +280,6 @@ end
 function Chat:General_OnUpdate(elapsedSec)
 	if(not this:IsVisible()) then return end
 end
-function Chat:General_OnHyperlinkClick(link, text, button)
-	SetItemRef(link, text, button)
-end
 
 
 
@@ -723,7 +720,7 @@ function Chat:General_Init()
 	end)
 	frame:SetScript('OnEvent', function() Chat:General_OnEvent(event) end)
 	frame:SetScript('OnUpdate', function() Chat:General_OnUpdate(arg1) end)
-	frame:SetScript('OnHyperlinkClick', function() Chat:General_OnHyperlinkShow(arg1, arg2, arg3) end)
+	frame:SetScript('OnHyperlinkClick', function() Chat:OnHyperlinkShow(arg1, arg2, arg3) end)
 	frame:RegisterEvent('PLAYER_ENTERING_WORLD')
 	frame:RegisterEvent('TIME_PLAYED_MSG')
 	frame:RegisterEvent('ZONE_UNDER_ATTACK')
@@ -840,7 +837,7 @@ function Chat:General_Init()
 	-- Prepare the frame after registering and hooking
 	frame:Clear()
 	frame:AddMessage('---------------------------------------------------------------------------', 1, 1, 1, 0)
-	frame:AddMessage('ElronsUI v0.0.0.1', 1, 1, 1, 0)
+	frame:AddMessage(format('%s v%s', Engine.info.title, Engine.info.version), 1, 1, 1, 0)
 	frame:AddMessage('', 1, 1, 1, 0)
 	frame:AddMessage(' Developer: Elron MacBong a.k.a. JAYMC', 1, 1, 1, 0)
 	frame:AddMessage('---------------------------------------------------------------------------\n', 1, 1, 1, 0)
