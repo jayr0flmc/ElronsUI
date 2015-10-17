@@ -1,0 +1,17 @@
+<Bindings>
+	<Binding name='Raid Marker' header='ELRONSUI' runOnUp='true'>
+		RaidMarker_HotkeyPressed(keystate)
+	</Binding>
+	<Binding name='Farm Mode' runOnUp='false'>
+		FarmMode()
+	</Binding>
+	<Binding name='Toggle Chat (Left)' runOnUp='false'>
+		ToggleChat('left')
+	</Binding>
+	<Binding name='Toggle Chat (Right)' runOnUp='false'>
+		ToggleChat('right')
+	</Binding>
+	<Binding name='Toggle Chat (Both)' runOnUp='false'>
+		ToggleChat('both')
+	</Binding>
+</Bindings>

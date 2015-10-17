@@ -1,0 +1,29 @@
+## Interface: 11200
+## LoadOnDemand: 0
+## DefaultState: enabled
+## Secure: 0
+
+## Title: |cff278009ElronsUI|r
+## Notes: Modular and lightweight framework for World of WarCraft Vanilla.
+## Notes-deDE: Modular und performantes Framework für World of WarCraft Vanilla.
+## Author: Elron MacBong
+## Version: 0.0.1.2
+
+## Dependencies: Ace2
+## OptionalDeps: Blizzard_DebugTools, Blizzard_PetJournal
+
+## SavedVariables: ElronsDB
+## SavedVariablesPerCharacter: ElronsCharacterDB
+
+init.lua
+
+libs\load_libs.xml
+
+core\load_core.xml
+development\load_development.xml
+
+layout\load_layout.xml
+config\load_config.xml
+locale\load_locale.xml
+
+modules\load_modules.xml

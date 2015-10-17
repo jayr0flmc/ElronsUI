@@ -1,0 +1,13 @@
+<Ui xmlns = 'http://www.blizzard.com/wow/ui'>
+	<Script file = 'chat.lua' />
+	
+	<Script file='chat_general.lua' />
+	<Script file='chat_guild.lua' />
+	<Script file='chat_party.lua' />
+	<Script file='chat_raid.lua' />
+	<Script file='chat_lfg.lua' />
+	
+	<Script file='log_combat.lua' />
+	<Script file='log_loot.lua' />
+	<Script file='log_error.lua' />
+</Ui>

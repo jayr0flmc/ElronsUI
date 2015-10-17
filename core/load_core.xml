@@ -1,0 +1,14 @@
+<Ui xmlns = 'http://www.blizzard.com/wow/ui'>
+	<Script file = 'debug.lua' />
+	<Script file = 'math.lua' />
+	<Script file = 'string.lua' />
+	<Script file = 'functions.lua' />
+	
+	<Script file = 'communication.lua' />
+	
+	<Script file = 'module.lua' />
+	
+	<Script file = 'command.lua' />
+	
+	<Script file = 'core.lua' />
+</Ui>
