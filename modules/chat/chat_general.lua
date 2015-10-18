@@ -775,7 +775,7 @@ function Chat:General_Init()
 	-- Setup EditBox
 	h = DB.editBox.height
 	-- Create editBox
-	editBox = Layout:CreateFrame('EditBox', 'Chat_EditBox', getglobal('ElronsUI_Chat'), w, h)
+	editBox = Layout:CreateFrame('EditBox', 'Chat_EditBox', getglobal('ElronsUI_Chat'), w, h, true)
 	-- Set strata and level
 	editBox:SetFrameStrata('DIALOG')
 	editBox:SetFrameLevel(1)

@@ -7,7 +7,7 @@
 ## Notes: Modular and lightweight framework for World of WarCraft Vanilla.
 ## Notes-deDE: Modular und performantes Framework für World of WarCraft Vanilla.
 ## Author: Elron MacBong
-## Version: 0.0.1.2
+## Version: 0.0.1.3
 
 ## Dependencies: Ace2
 ## OptionalDeps: Blizzard_DebugTools, Blizzard_PetJournal

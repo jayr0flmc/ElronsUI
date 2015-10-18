@@ -143,6 +143,16 @@ function Engine:Initialize()
 	
 	
 	
+	self:Debug('Initializing all user modules...', 'info')
+	if(self:InitModules(self.DB.db.profile.modules.enabled)) then
+		self:Debug('Unable to initialize all user modules!', 'error')
+		
+		return
+	end
+	self:Debug('User modules successfully initialized.', 'info')
+	
+	
+	
 	self.initialized = true
 	self:Debug('Engine successfully initialized.', 'info')
 	

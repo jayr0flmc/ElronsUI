@@ -1,3 +1,7 @@
 <Ui xmlns = 'http://www.blizzard.com/wow/ui'>
 	<Include file = 'chat\load_chat.xml' />
+	
+	<Include file = 'actionbars\load_actionbars.xml' />
+	<Include file = 'unitframes\load_unitframes.xml' />
+	<Include file = 'minimap\load_minimap.xml' />
 </Ui>
