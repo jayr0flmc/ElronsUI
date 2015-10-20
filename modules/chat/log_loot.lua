@@ -18,7 +18,6 @@ function Chat:Loot_OnEvent(event)
 	local h, m = GetGameTime()
 	local message, author, language, channelString, target, flags, zoneID, channelID, channelName
 	local type, info, channelLength
-	local frame = Engine.Chat.Log.Loot
 	
 	output = ''
 	if(strlen(h) == 1) then h = '0'..h end
