@@ -14,4 +14,10 @@
 	<Binding name='Toggle Chat (Both)' runOnUp='false'>
 		ToggleChat('both')
 	</Binding>
+	<Binding name='Scroll full up' runOnUp='true'>
+		ChatScrollUp_HotkeyPressed(keystate)
+	</Binding>
+	<Binding name='Scroll full down' runOnUp='true'>
+		ChatScrollDown_HotkeyPressed(keystate)
+	</Binding>
 </Bindings>

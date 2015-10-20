@@ -2,16 +2,54 @@ local Engine = getglobal('ElronsUI')
 local Layout = Engine:NewModule('Layout')
 local DB
 
-function Layout:CreateFrame(type, name, parent, width, height, backdrop)
+function Layout:CreateWindow(name, parent, width, height, strata, level)
 	local frame
-	local backdrop = backdrop or false
-	name = 'ElronsUI_'..name
+	local strata	= strata or nil
+	local level		= level or nil
+	
+	frame = self:CreateFrame('Frame', name, parent, width, height, true, strata, level)
+	
+	return frame
+end
+
+function Layout:CreateButton(name, parent, width, height, strata, level)
+	local button
+	local strata	= strata or nil
+	local level		= level or nil
+	
+	button = self:CreateFrame('Button', name, parent, width, height, true, strata, level)
+	
+	return button
+end
+
+function Layout:CreateStatusBar(name, parent, width, height, strata, level)
+	local bar
+	local strata	= strata or nil
+	local level		= level or nil
+	
+	bar = self:CreateFrame('StatusBar', name, parent, width, height, true, strata, level)
+	
+	return bar
+end
+
+
+
+-- Create a new frame
+function Layout:CreateFrame(type, name, parent, width, height, backdrop, strata, level)
+	local frame
+	local backdrop	= backdrop or false
+	local strata	= strata or 'BACKGROUND'
+	local level		= level or 0
+	nameFull = 'ElronsUI_'..name
 	
 	-- Create frame
-	frame = CreateFrame(type, name, parent)
+	frame = CreateFrame(type, nameFull, parent)
 	-- Set width and height
 	frame:SetWidth(width)
 	frame:SetHeight(height)
+	-- Set strata and level
+	frame:SetFrameStrata(strata)
+	frame:SetFrameLevel(level)
 	-- Set center of screen
 	frame:SetPoint('CENTER', parent, 'CENTER', 0, 0)
 	-- Set backdrop and edges
@@ -19,13 +57,31 @@ function Layout:CreateFrame(type, name, parent, width, height, backdrop)
 		self:SetBackdrop(frame, type)
 	end
 	
+	-- Set variables
+	frame.name		= name
+	frame.locked	= true
+	frame.protected	= false
+	
+	-- Return frame
 	return frame
 end
 
+-- Set backdrop and edges
 function Layout:SetBackdrop(frame, type)
 	local type = type or ''
 	
-	if(type == 'StatusBar') then
+	if(type == 'Frame') then
+		frame:SetBackdrop({
+			bgFile		= DB.frame.backdrop.bgFile,
+			edgeFile	= DB.frame.backdrop.edgeFile,
+			tile		= DB.frame.backdrop.tile,
+			tileSize	= DB.frame.backdrop.tileSize,
+			edgeSize	= DB.frame.backdrop.edgeSize,
+			insets		= DB.frame.backdrop.insets
+		})
+		frame:SetBackdropColor(DB.frame.backdrop.color.r, DB.frame.backdrop.color.g, DB.frame.backdrop.color.b, DB.frame.backdrop.color.a)
+		frame:SetBackdropBorderColor(DB.frame.border.color.r, DB.frame.border.color.g, DB.frame.border.color.b, DB.frame.border.color.a)
+	elseif(type == 'StatusBar') then
 		frame:SetBackdrop({
 			bgFile		= DB.statusbar.backdrop.bgFile,
 			edgeFile	= DB.statusbar.backdrop.edgeFile,
@@ -39,52 +95,16 @@ function Layout:SetBackdrop(frame, type)
 		frame:SetStatusBarTexture(DB.statusbar.backdrop.bgFile, 'ARTWORK')
 	else
 		frame:SetBackdrop({
-			bgFile		= DB.window.backdrop.bgFile,
-			edgeFile	= DB.window.backdrop.edgeFile,
-			tile		= DB.window.backdrop.tile,
-			tileSize	= DB.window.backdrop.tileSize,
-			edgeSize	= DB.window.backdrop.edgeSize,
-			insets		= DB.window.backdrop.insets
+			bgFile		= DB.frame.backdrop.bgFile,
+			edgeFile	= DB.frame.backdrop.edgeFile,
+			tile		= DB.frame.backdrop.tile,
+			tileSize	= DB.frame.backdrop.tileSize,
+			edgeSize	= DB.frame.backdrop.edgeSize,
+			insets		= DB.frame.backdrop.insets
 		})
-		frame:SetBackdropColor(DB.window.backdrop.color.r, DB.window.backdrop.color.g, DB.window.backdrop.color.b, DB.window.backdrop.color.a)
-		frame:SetBackdropBorderColor(DB.window.border.color.r, DB.window.border.color.g, DB.window.border.color.b, DB.window.border.color.a)
+		frame:SetBackdropColor(DB.frame.backdrop.color.r, DB.frame.backdrop.color.g, DB.frame.backdrop.color.b, DB.frame.backdrop.color.a)
+		frame:SetBackdropBorderColor(DB.frame.border.color.r, DB.frame.border.color.g, DB.frame.border.color.b, DB.frame.border.color.a)
 	end
-end
-
-
-
-function Layout:CreateWindow(name, parent, width, height)
-	local frame
-	name = 'ElronsUI_'..name
-	
-	-- Create frame
-	frame = CreateFrame('Frame', name, parent)
-	-- Set width and height
-	frame:SetWidth(width)
-	frame:SetHeight(height)
-	-- Set center of screen
-	frame:SetPoint('CENTER', parent, 'CENTER', 0, 0)
-	-- Set backdrop and edges
-	self:SetBackdrop(frame)
-	
-	return frame
-end
-
-function Layout:CreateButton(name, width, height, parent, anchor)
-	local button
-	name = 'ElronsUI_'..name
-	
-	-- Create button
-	button = CreateFrame('Button', name, parent)
-	-- Set width and height
-	button:SetWidth(width)
-	button:SetHeight(height)
-	-- Set position
-	button:SetPoint(anchor.point, anchor.relFrame, anchor.relPoint, anchor.oX, anchor.oY)
-	-- Set backdrop and edges
-	self:SetBackdrop(frame)
-	
-	return button
 end
 
 
@@ -100,3 +120,9 @@ function Layout:Initialize()
 	
 	return true
 end
+
+
+
+--[[
+
+]]--

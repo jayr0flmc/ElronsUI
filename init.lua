@@ -41,30 +41,11 @@ setglobal('ElronsUI', Engine)
 
 -- Prepare general frames
 local frame = CreateFrame('Frame', 'ElronsUI')
+-- Event handling
+frame:SetScript('OnEvent', function() Engine:OnEvent(event) end)
 frame:RegisterEvent('ADDON_LOADED')
 frame:RegisterEvent('SPELLS_CHANGED')
 frame:RegisterEvent('PLAYER_LOGIN')
 frame:RegisterEvent('PLAYER_ENTERING_WORLD')
 frame:RegisterEvent('PLAYER_ALIVE')
 frame:RegisterEvent('CHAT_MSG_ADDON')
-frame:SetScript('OnEvent', function()
-	if(event == 'ADDON_LOADED') then Engine:OnAddonLoaded(arg1) end
-	if(event == 'SPELLS_CHANGED') then Engine:OnSpellsChanged() end
-	if(event == 'PLAYER_LOGIN') then Engine:OnPlayerLogin() end
-	if(event == 'PLAYER_ENTERING_WORLD') then Engine:OnPlayerEnteringWorld() end
-	if(event == 'PLAYER_ALIVE') then Engine:OnPlayerAlive() end
-	if(event == 'CHAT_MSG_ADDON') then Engine:AddonMsgReceive(arg1, arg2, arg3, arg4) end
-end)
-
-
-
-
---[[
-local frame = CreateFrame('Frame')
-frame:RegisterEvent('ADDON_LOADED')
-frame:RegisterEvent('PLAYER_LOGIN')
-frame:SetScript('OnEvent', function()
-	if(event == 'ADDON_LOADED' and arg1 == 'ElronsUI') then Engine:OnAddOnLoaded() end
-	if(event == 'PLAYER_LOGIN') then Engine:Initialize() end
-end)
-]]--

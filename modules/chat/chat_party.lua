@@ -1,8 +1,18 @@
+-- Dependencies
 local Engine = getglobal('ElronsUI')
-local Chat = Engine:GetModule('Chat')
 local Layout = Engine:GetModule('Layout')
+local Chat = Engine:GetModule('Chat')
 local DB
 
+-- Register variables
+
+-- External functions
+
+-- Internal functions
+
+
+
+-- Class functions
 function Chat:Party_OnEvent(event)
 	local output, prefixTime, prefixPlayer
 	local h, m = GetGameTime()
@@ -144,8 +154,9 @@ end
 
 
 
+-- Initialize
 function Chat:Party_Init()
-	local frame, editBox, header
+	local frame
 	local w, h
 	
 	-- Bring in database

@@ -66,18 +66,21 @@ function Config:Initialize()
 				}
 			},
 			
+			
+			
 			development	= true,
 			debug		= false
 		},
 		
 		modules = {
 			enabled = {
+				--'ActionBars',
 				'UnitFrames'
 			}
 		},
 		
 		layout = {
-			window = {
+			frame = {
 				backdrop = {
 					bgFile		= 'Interface\\AddOns\\ElronsUI\\textures\\backdrop_plain.tga',
 					edgeFile	= 'Interface\\AddOns\\ElronsUI\\textures\\backdrop_plain.tga',
@@ -85,10 +88,10 @@ function Config:Initialize()
 					tileSize	= 0,
 					edgeSize	= 1,
 					insets = {
-						left	= -2,
-						right	= -2,
-						top		= -2,
-						bottom	= -2
+						left	= -1,
+						right	= -1,
+						top		= -1,
+						bottom	= -1
 					},
 					
 					color = {
@@ -116,10 +119,10 @@ function Config:Initialize()
 					tileSize	= 0,
 					edgeSize	= 1,
 					insets = {
-						left	= -2,
-						right	= -2,
-						top		= -2,
-						bottom	= -2
+						left	= -1,
+						right	= -1,
+						top		= -1,
+						bottom	= -1
 					},
 					
 					color = {
@@ -199,7 +202,18 @@ function Config:Initialize()
 					b	= 1.0,
 					a	= 1.0
 				}
+			},
+			
+			toggle = {
+				chat	= true,
+				log		= true
 			}
+		},
+		
+		
+		
+		actionbar = {
+			
 		},
 		
 		unitframe = {
@@ -244,7 +258,7 @@ function Config:Initialize()
 		
 		debug = {
 			info	= true,
-			debug	= true,
+			debug	= false,
 			warn	= true,
 			error	= true,
 			crit	= true

@@ -64,11 +64,18 @@ function Engine:LoadCommands()
 		desc	= 'Collection of chat settings',
 		name	= 'chat',
 		args = {
-			toggle = {
+			toggleChat = {
 				type	= 'toggle',
 				set		= SetToggleStateChat,
 				get		= GetToggleStateChat,
 				desc	= 'Toggle chat',
+				name	= 'toggle'
+			},
+			toggleLog = {
+				type	= 'toggle',
+				set		= SetToggleStateLog,
+				get		= GetToggleStateLog,
+				desc	= 'Toggle log',
 				name	= 'toggle'
 			}
 		}

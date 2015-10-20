@@ -1,14 +1,16 @@
 <Ui xmlns = 'http://www.blizzard.com/wow/ui'>
+	<Include file = 'events\load_events.lua' />
+	
 	<Script file = 'debug.lua' />
 	<Script file = 'math.lua' />
 	<Script file = 'string.lua' />
 	<Script file = 'functions.lua' />
 	
 	<Script file = 'communication.lua' />
-	
 	<Script file = 'module.lua' />
-	
 	<Script file = 'command.lua' />
+	
+	<Script file = 'event.lua' />
 	
 	<Script file = 'core.lua' />
 </Ui>

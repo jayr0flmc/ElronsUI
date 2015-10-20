@@ -1,12 +1,6 @@
 local Engine = getglobal('ElronsUI')
 Engine.__index = Engine
 
--- General needed modules
-local modules = {
-	'Layout',
-	'Chat'
-}
-
 
 
 -- This frames everything in ElronsUI
@@ -28,53 +22,6 @@ end
 
 
 
--- General event handler
-function Engine:OnEvent(event)
-end
-
-function Engine:OnAddonLoaded(addon)
-	self:Debug(format('Addon loaded [%s].', tostring(addon)), 'debug')
-end
-
-function Engine:OnSpellsChanged()
-	self:Debug('Spells changed.', 'debug')
-end
-
-function Engine:OnPlayerLogin()
-	self:Debug('Player logging in...', 'debug')
-	
-	self:Initialize()
-	
-	-- Join custom channel
-	--local type, name = JoinChannelByName('ElronsUI')
-	--self:Debug(format('type: %s | name: %s', tostring(type), tostring(name)), 'debug')
-	
-	self:Debug('Player logged in.', 'debug')
-end
-
-function Engine:OnPlayerEnteringWorld()
-	self:Debug('Player entering world...', 'debug')
-	
-	-- Do version check
-	local msg = format('VersionCheck#%s#%s', tostring(self.info.version), tostring(self.DB.db.profile.general.development))
-	
-	self:AddonMsgSend('BATTLEGROUND', msg)
-	self:AddonMsgSend('GUILD', msg)
-	self:AddonMsgSend('OFFICER', msg)
-	self:AddonMsgSend('PARTY', msg)
-	self:AddonMsgSend('RAID', msg)
-	
-	self:Debug('Player entered world.', 'debug')
-end
-
-function Engine:OnPlayerAlive()
-	self:Debug('Player is alive.', 'debug')
-	
-	
-end
-
-
-
 -- Initialize the engine
 function Engine:Initialize()
 	self:Debug(format('Initializing %s...', self.info.title), 'info')
@@ -90,13 +37,6 @@ function Engine:Initialize()
 			Class	= UnitClass('player'),
 			Race	= UnitRace('player'),
 			Faction	= UnitFactionGroup('player')
-		},
-		
-		PVP		= {
-			IsPVP	= UnitIsPVP('player'),
-			IsFFA	= UnitIsPVPFreeForAll('player'),
-			Name	= UnitPVPName('player'),
-			Rank	= UnitPVPRank('player')
 		}
 	}
 	self:Debug('Player data collected.', 'info')
@@ -129,9 +69,31 @@ function Engine:Initialize()
 	self:LoadCommands()
 	self:Debug('Commands loaded.', 'info')
 	
+	self:Debug('Loading layout...', 'debug')
+	if(not self:InitModule('Layout')) then
+		error = true
+		self:Debug('Error while try to load layout.', 'error')
+	else
+		self:Debug('Layout loaded.', 'info')
+	end
 	
+	self:Debug('Initializing configuration window...', 'debug')
+	if(not self:GetModule('Config'):InitConfigWindow()) then
+		error = true
+		self:Debug('Error while try to initialize configuration window.', 'error')
+	else
+		self:Debug('Configuration window initialized.', 'info')
+	end
 	
-	if(error or self:InitModules(modules)) then
+	self:Debug('Loading chat...', 'debug')
+	if(not self:InitModule('Chat')) then
+		error = true
+		self:Debug('Error while try to load chat.', 'error')
+	else
+		self:Debug('Chat loaded.', 'info')
+	end
+	
+	if(error) then
 		self:Debug('Unable to initialize all general needed modules!', 'crit')
 		self:Debug(format('%s will be disabled now.', self.info.title), 'info')
 		--Disable()

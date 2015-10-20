@@ -1,11 +1,42 @@
+-- Dependencies
 local Engine = getglobal('ElronsUI')
-local Chat = Engine:NewModule('Chat')
 local Layout = Engine:GetModule('Layout')
 local DB
 
-local toggleChat = false
-local toggleLog = false
+-- Register new module
+local Chat = Engine:NewModule('Chat')
 
+-- Register variables
+Chat.buttonUp	= false
+Chat.buttonDown	= false
+
+-- External functions
+function GetToggleStateChat()
+	return DB.toggle.chat
+end
+function SetToggleStateChat(toggle)
+	DB.toggle.chat = toggle
+end
+
+function GetToggleStateLog()
+	return DB.toggle.log
+end
+function SetToggleStateLog(toggle)
+	DB.toggle.log = toggle
+end
+
+function ChatScrollUp_HotkeyPressed(state)
+	Chat.buttonUp = (state == 'down')
+end
+function ChatScrollDown_HotkeyPressed(state)
+	Chat.buttonDown = (state == 'down')
+end
+
+-- Internal functions
+
+
+
+-- Class functions
 function Chat:OnHyperlinkClick(link, text, button)
 	SetItemRef(link, text, button)
 end
@@ -128,14 +159,11 @@ end
 function Chat:CreateTab(name, parent, width, height, point, relFrame, relPoint, oX, oY)
 	local tab
 	
-	tab = Layout:CreateWindow(name, parent, width, height)
-	-- Set strata and level
-	tab:SetFrameStrata('LOW')
-	tab:SetFrameLevel(1)
+	tab = Layout:CreateFrame('Frame', name, parent, width, height, true, 'LOW', 1)
 	-- Set position
 	tab:SetPoint(point, relFrame, relPoint, oX, oY)
 	-- Set font, color and text
-	tab.text = tab:CreateFontString(tab:GetName()..'_Text', 'OVERLAY', 'GameFontNormal')
+	tab.text = tab:CreateFontString(nil, 'OVERLAY', 'GameFontNormal')
 	tab.text:SetAllPoints()
 	tab.text:SetTextColor(1, 1, 1, 1)
 	tab.text:SetText('')
@@ -146,20 +174,17 @@ function Chat:CreateTab(name, parent, width, height, point, relFrame, relPoint, 
 	return tab
 end
 
-function Chat:CreateLayout()
-	local areaChat, areaLog
+function Chat:CreateLayoutChat()
+	local areaChat
 	local barTop, barBot
 	local tab
 	local tabGeneral, tabGuild, tabParty, tabRaid, tabLFG
-	local tabCombat, tabLoot, tabError
 	
-	areaChat = Layout:CreateWindow('Chat', Engine.UIParent, DB.width, DB.height)
+	areaChat = Layout:CreateWindow('Chat', Engine.UIParent, DB.width, DB.height, 'BACKGROUND', 0)
 	areaChat:SetPoint('BOTTOMLEFT', Engine.UIParent, 'BOTTOMLEFT', 4, 4)
-	areaChat:SetFrameStrata('BACKGROUND')
-	areaChat:SetFrameLevel(0)
-	barTop = Layout:CreateWindow('Chat_BarTop', areaChat, DB.width - 8, 20)
+	barTop = Layout:CreateFrame('Frame', 'Chat_BarTop', areaChat, (DB.width - 8), 20, true, 'BACKGROUND', 0)
 	barTop:SetPoint('TOP', areaChat, 'TOP', 0, -4)
-	barBot = Layout:CreateWindow('Chat_BarBot', areaChat, DB.width - 8, 20)
+	barBot = Layout:CreateFrame('Frame', 'Chat_BarBot', areaChat, DB.width - 8, 20, true, 'BACKGROUND', 0)
 	barBot:SetPoint('BOTTOM', areaChat, 'BOTTOM', 0, 4)
 	
 	-- Tabs
@@ -228,9 +253,12 @@ function Chat:CreateLayout()
 	tab:SetScript('OnMouseUp', function() self:TabChat_OnClick('LFG', arg1) end)
 	-- Save as variable
 	tabLFG = tab
-	
-	
-	
+end
+function Chat:CreateLayoutLog()
+	local areaLog
+	local barTop, barBot
+	local tab
+	local tabCombat, tabLoot, tabError
 	
 	areaLog = Layout:CreateWindow('Log', Engine.UIParent, DB.width, DB.height)
 	areaLog:SetPoint('BOTTOMRIGHT', Engine.UIParent, 'BOTTOMRIGHT', -4, 4)
@@ -283,17 +311,14 @@ function Chat:CreateLayout()
 	tabError = tab
 end
 
-
-
-function GetToggleStateChat()
-	return toggleChat
-end
-function SetToggleStateChat(toggle)
-	toggleChat = toggle
+function Chat:CreateLayout()
+	self:CreateLayoutChat()
+	self:CreateLayoutLog()
 end
 
 
 
+-- Initialize
 function Chat:Initialize()
 	DB = Engine.DB.db.profile.chat
 	
@@ -304,6 +329,10 @@ function Chat:Initialize()
 	self:Party_Init()
 	self:Raid_Init()
 	self:LFG_Init()
+	
+	self:Combat_Init()
+	self:Loot_Init()
+	self:Error_Init()
 	
 	return true
 end

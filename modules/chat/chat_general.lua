@@ -1,25 +1,18 @@
+-- Dependencies
 local Engine = getglobal('ElronsUI')
-local Chat = Engine:GetModule('Chat')
 local Layout = Engine:GetModule('Layout')
+local Chat = Engine:GetModule('Chat')
 local DB
 
-ChatTypeInfo["OFFICER"]		= { sticky = 1 };
-ChatTypeInfo["WHISPER"]		= { sticky = 1 };
-ChatTypeInfo["REPLY"]		= { sticky = 1 };
-ChatTypeInfo["CHANNEL"]		= { sticky = 1 };
-ChatTypeInfo["CHANNEL1"]	= { sticky = 1 };
-ChatTypeInfo["CHANNEL2"]	= { sticky = 1 };
-ChatTypeInfo["CHANNEL3"]	= { sticky = 1 };
-ChatTypeInfo["CHANNEL4"]	= { sticky = 1 };
-ChatTypeInfo["CHANNEL5"]	= { sticky = 1 };
-ChatTypeInfo["CHANNEL6"]	= { sticky = 1 };
-ChatTypeInfo["CHANNEL7"]	= { sticky = 1 };
-ChatTypeInfo["CHANNEL8"]	= { sticky = 1 };
-ChatTypeInfo["CHANNEL9"]	= { sticky = 1 };
-ChatTypeInfo["CHANNEL10"]	= { sticky = 1 };
+-- Register variables
+
+-- External functions
+
+-- Internal functions
 
 
 
+-- Class functions
 function Chat:General_OnEvent(event)
 	local output, prefixTime, prefixPlayer
 	local h, m = GetGameTime()
@@ -683,12 +676,29 @@ end
 
 
 
+-- Initialize
 function Chat:General_Init()
 	local frame, editBox, header
 	local w, h
 	
 	-- Bring in database
 	DB = Engine.DB.db.profile.chat
+	
+	-- Setup sticky
+	ChatTypeInfo["OFFICER"]		= { sticky = 1 };
+	ChatTypeInfo["WHISPER"]		= { sticky = 1 };
+	ChatTypeInfo["REPLY"]		= { sticky = 1 };
+	ChatTypeInfo["CHANNEL"]		= { sticky = 1 };
+	ChatTypeInfo["CHANNEL1"]	= { sticky = 1 };
+	ChatTypeInfo["CHANNEL2"]	= { sticky = 1 };
+	ChatTypeInfo["CHANNEL3"]	= { sticky = 1 };
+	ChatTypeInfo["CHANNEL4"]	= { sticky = 1 };
+	ChatTypeInfo["CHANNEL5"]	= { sticky = 1 };
+	ChatTypeInfo["CHANNEL6"]	= { sticky = 1 };
+	ChatTypeInfo["CHANNEL7"]	= { sticky = 1 };
+	ChatTypeInfo["CHANNEL8"]	= { sticky = 1 };
+	ChatTypeInfo["CHANNEL9"]	= { sticky = 1 };
+	ChatTypeInfo["CHANNEL10"]	= { sticky = 1 };
 	
 	-- Calculate width and height
 	w = (DB.width - 8)
