@@ -178,7 +178,7 @@ function Config:Initialize()
 		
 		chat = {
 			width			= 412,
-			height			= 200,
+			height			= 250,
 			font			= 'ChatFontNormal',
 			size			= 10,
 			justifyH		= 'LEFT',
@@ -220,10 +220,15 @@ function Config:Initialize()
 			width	= 270,
 			height	= 54,
 			
+			button = {
+				width	= 26,
+				height	= 26
+			},
+			
 			player = {
 				buffs = {
-					min	= 6,
-					max	= 12
+					min	= 9,
+					max	= 9
 				},
 				debuffs = {
 					min	= 8,
@@ -233,8 +238,8 @@ function Config:Initialize()
 			
 			target = {
 				buffs = {
-					min	= 6,
-					max	= 12
+					min	= 8,
+					max	= 8
 				},
 				debuffs = {
 					min	= 8,
@@ -244,8 +249,8 @@ function Config:Initialize()
 			
 			pet = {
 				buffs = {
-					min	= 6,
-					max	= 12
+					min	= 11,
+					max	= 11
 				},
 				debuffs = {
 					min	= 8,
