@@ -395,7 +395,7 @@ function UnitFrames:CreateBuffButton(unitType, buffType, buffID, name, parent, w
 	-- Cooldown string
 	fString = button:CreateFontString(nil, 'OVERLAY', 'NumberFontNormal')
 	fString:SetPoint('TOP', -1, -1)
-	fString:SetFont('Fonts\\ARIALN.TTF', 10, '')
+	fString:SetFont('Fonts\\ARIALN.TTF', 10, 'OUTLINE')
 	fString:Hide()
 	button.cooldown = fString
 	
